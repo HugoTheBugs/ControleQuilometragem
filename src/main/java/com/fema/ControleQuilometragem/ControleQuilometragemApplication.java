@@ -8,6 +8,7 @@ public class ControleQuilometragemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ControleQuilometragemApplication.class, args);
+		System.out.println("Hello World!");
 	}
 
 }
