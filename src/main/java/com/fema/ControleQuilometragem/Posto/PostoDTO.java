@@ -1,4 +1,5 @@
 package com.fema.ControleQuilometragem.Posto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
