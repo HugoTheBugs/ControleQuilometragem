@@ -30,7 +30,7 @@ public class VeiculoMapper {
         veiculoDTO.setCategoria(veiculoModel.getCategoria());
         veiculoDTO.setStatus(veiculoModel.getStatus());
         veiculoDTO.setMarca(veiculoModel.getMarca());
-        veiculoDTO.setCombustivel(veiculoDTO.getCombustivel());
+        veiculoDTO.setCombustivel(veiculoModel.getCombustivel());
 
         return veiculoDTO;
     }
