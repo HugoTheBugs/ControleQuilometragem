@@ -27,3 +27,26 @@ VALUES
 (3, 'MNO-1234', 'Gol', 2021, 45.0, 'Hatch', 'Inativo', 3, 2),
 (4, 'DEF-9876', 'Onix', 2022, 50.0, 'Hatch', 'Ativo', 2, 1),
 (5, 'JKL-5432', 'Strada', 2020, 60.0, 'Pickup', 'Ativo', 2, 3);
+
+-- Inserir Clientes
+INSERT INTO tb_cliente (id, nome, cnpj, endereco)
+VALUES
+(1, 'Transportes ABC', '12.345.678/0001-99', 'Rua das Laranjeiras, 100 - São Paulo/SP'),
+(2, 'Logística Rápida', '98.765.432/0001-55', 'Av. Brasil, 2000 - Rio de Janeiro/RJ'),
+(3, 'Distribuidora Minas', '11.222.333/0001-88', 'Rua da Liberdade, 300 - Belo Horizonte/MG');
+
+-- Inserir Itinerários
+INSERT INTO tb_itinerario (id, descricao, cliente_id)
+VALUES
+(1, 'São Paulo - Rio de Janeiro', 1),
+(2, 'Rio de Janeiro - Belo Horizonte', 2),
+(3, 'Belo Horizonte - São Paulo', 3);
+
+-- Inserir Motoristas
+INSERT INTO tb_motorista (id, nome, cnh, cnh_categoria, cnh_vencimento, telefone, status)
+VALUES
+(1, 'João Silva', '12345678900', 'B', '2026-08-15', '(11) 99999-1234', 'Ativo'),
+(2, 'Maria Souza', '98765432100', 'C', '2025-12-30', '(21) 98888-5678', 'Ativo'),
+(3, 'Carlos Lima', '45678912300', 'D', '2024-11-20', '(31) 97777-9876', 'Inativo');
+
+
