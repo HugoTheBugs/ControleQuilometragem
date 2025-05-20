@@ -1,4 +1,6 @@
 package com.fema.ControleQuilometragem.Movimentacao;
 
-public interface MovimentacaoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovimentacaoRepository extends JpaRepository<MovimentacaoModel, Long> {
 }
