@@ -16,8 +16,8 @@ public class MovimentacaoService {
         this.movimentacaoMapper = movimentacaoMapper;
     }
 
-    //Realizar Lancamento
-    public MovimentacaoDTO criarLancamento(MovimentacaoDTO movimentacaoDTO){
+    //Realizar Movimentacao
+    public MovimentacaoDTO criarMovimentacao(MovimentacaoDTO movimentacaoDTO){
         MovimentacaoModel movimentacao = movimentacaoMapper.map(movimentacaoDTO);
         movimentacao = movimentacaoRepository.save(movimentacao);
         return movimentacaoMapper.map(movimentacao);

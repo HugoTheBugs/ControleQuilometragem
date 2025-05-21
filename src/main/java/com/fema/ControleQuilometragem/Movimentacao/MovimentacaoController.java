@@ -1,7 +1,6 @@
 package com.fema.ControleQuilometragem.Movimentacao;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class MovimentacaoController {
 
     @PostMapping("/criar")
     public ResponseEntity<String> criarLancamento(@RequestBody MovimentacaoDTO movimentacao){
-        MovimentacaoDTO novaMovimentacao = movimentacaoService.criarLancamento(movimentacao);
+        MovimentacaoDTO novaMovimentacao = movimentacaoService.criarMovimentacao(movimentacao);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Movimentação criada com sucesso, (ID): " + novaMovimentacao.getId());
     }
