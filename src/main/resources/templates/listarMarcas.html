@@ -1,0 +1,25 @@
+<!
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Tabela de Marcas</title>
+</head>
+<body>
+<h1>Lista de Marcas</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Marca</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "marca: ${marcas}">
+        <td th:text="${marca.id}"></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
