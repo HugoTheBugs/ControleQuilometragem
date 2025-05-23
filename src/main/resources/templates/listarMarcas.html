@@ -16,10 +16,13 @@
     <tbody>
     <tr th:each = "marca: ${marcas}">
         <td th:text="${marca.id}"></td>
-        <td></td>
+        <td th:text="${marca.nome}"></td>
+        <td>
+            <a>Alterar</a>
+            <a>Deletar</a>
+        </td>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>
