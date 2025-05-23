@@ -19,7 +19,7 @@
         <td th:text="${marca.nome}"></td>
         <td>
             <a>Alterar</a>
-            <a>Deletar</a>
+            <a th:href="@{/marcas/ui/deletar/{id}(id=${marca.id})}">Deletar</a>
         </td>
     </tr>
     </tbody>
