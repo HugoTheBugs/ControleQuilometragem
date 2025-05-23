@@ -1,52 +1,70 @@
--- Inserir Combustíveis
-INSERT INTO tb_combustivel (id, nome)
-VALUES
+-- COMBUSTÍVEIS
+INSERT INTO tb_combustivel (id, nome) VALUES
 (1, 'Gasolina'),
 (2, 'Álcool'),
-(3, 'Diesel');
+(3, 'Diesel'),
+(4, 'GNV'),
+(5, 'Querosene');
 
--- Inserir Marcas
-INSERT INTO tb_marca (id, nome)
-VALUES
+-- MARCAS
+INSERT INTO tb_marca (id, nome) VALUES
 (1, 'Ford'),
 (2, 'Chevrolet'),
-(3, 'Volkswagen');
+(3, 'Volkswagen'),
+(4, 'Toyota'),
+(5, 'Renault');
 
--- Inserir Postos
-INSERT INTO tb_posto (id, nome, cidade, estado)
-VALUES
+-- POSTOS
+INSERT INTO tb_posto (id, nome, cidade, estado) VALUES
 (1, 'Posto Central', 'São Paulo', 'SP'),
 (2, 'Posto Jardim', 'Rio de Janeiro', 'RJ'),
-(3, 'Posto Vitória', 'Belo Horizonte', 'MG');
+(3, 'Posto Vitória', 'Belo Horizonte', 'MG'),
+(4, 'Posto Avenida', 'Curitiba', 'PR'),
+(5, 'Posto Norte', 'Salvador', 'BA');
 
--- Inserir Veículos
-INSERT INTO tb_veiculo (id, placa, modelo, ano, tanque_capacidade, categoria, status, marca_id, combustivel_id)
-VALUES
+-- VEÍCULOS
+INSERT INTO tb_veiculo (id, placa, modelo, ano, tanque_capacidade, categoria, status, marca_id, combustivel_id) VALUES
 (1, 'ABC-1234', 'Fiesta', 2020, 50.0, 'Sedan', 'Ativo', 1, 1),
 (2, 'XYZ-5678', 'Civic', 2019, 55.0, 'Sedan', 'Ativo', 1, 1),
 (3, 'MNO-1234', 'Gol', 2021, 45.0, 'Hatch', 'Inativo', 3, 2),
 (4, 'DEF-9876', 'Onix', 2022, 50.0, 'Hatch', 'Ativo', 2, 1),
-(5, 'JKL-5432', 'Strada', 2020, 60.0, 'Pickup', 'Ativo', 2, 3);
+(5, 'JKL-5432', 'Strada', 2020, 60.0, 'Pickup', 'Ativo', 2, 3),
+(6, 'QWE-1111', 'Corolla', 2021, 55.0, 'Sedan', 'Ativo', 4, 1),
+(7, 'RTY-2222', 'Sandero', 2020, 50.0, 'Hatch', 'Ativo', 5, 2);
 
--- Inserir Clientes
-INSERT INTO tb_cliente (id, nome, cnpj, endereco)
-VALUES
+-- CLIENTES
+INSERT INTO tb_cliente (id, nome, cnpj, endereco) VALUES
 (1, 'Transportes ABC', '12.345.678/0001-99', 'Rua das Laranjeiras, 100 - São Paulo/SP'),
 (2, 'Logística Rápida', '98.765.432/0001-55', 'Av. Brasil, 2000 - Rio de Janeiro/RJ'),
-(3, 'Distribuidora Minas', '11.222.333/0001-88', 'Rua da Liberdade, 300 - Belo Horizonte/MG');
+(3, 'Distribuidora Minas', '11.222.333/0001-88', 'Rua da Liberdade, 300 - Belo Horizonte/MG'),
+(4, 'Expresso Sul', '22.333.444/0001-77', 'Av. Paraná, 400 - Curitiba/PR');
 
--- Inserir Itinerários
-INSERT INTO tb_itinerario (id, descricao, cliente_id)
-VALUES
+-- ITINERÁRIOS
+INSERT INTO tb_itinerario (id, descricao, cliente_id) VALUES
 (1, 'São Paulo - Rio de Janeiro', 1),
 (2, 'Rio de Janeiro - Belo Horizonte', 2),
-(3, 'Belo Horizonte - São Paulo', 3);
+(3, 'Belo Horizonte - São Paulo', 3),
+(4, 'Curitiba - Salvador', 4);
 
--- Inserir Motoristas
-INSERT INTO tb_motorista (id, nome, cnh, cnh_categoria, cnh_vencimento, telefone, status)
-VALUES
+-- MOTORISTAS
+INSERT INTO tb_motorista (id, nome, cnh, cnh_categoria, cnh_vencimento, telefone, status) VALUES
 (1, 'João Silva', '12345678900', 'B', '2026-08-15', '(11) 99999-1234', 'Ativo'),
 (2, 'Maria Souza', '98765432100', 'C', '2025-12-30', '(21) 98888-5678', 'Ativo'),
-(3, 'Carlos Lima', '45678912300', 'D', '2024-11-20', '(31) 97777-9876', 'Inativo');
+(3, 'Carlos Lima', '45678912300', 'D', '2024-11-20', '(31) 97777-9876', 'Inativo'),
+(4, 'Ana Pereira', '11223344556', 'C', '2027-01-15', '(41) 91234-5678', 'Ativo');
 
+-- ABASTECIMENTOS
+INSERT INTO tb_abastecimento (id, posto_id, motorista_id, veiculo_id, combustivel_id, data, km_atual, litros, valor_total) VALUES
+(1, 1, 1, 1, 1, '2025-05-20', 10000, 40.5, 250.00),
+(2, 2, 2, 2, 1, '2025-05-21', 20500, 38.0, 230.00),
+(3, 3, 3, 3, 2, '2025-05-22', 15000, 42.0, 270.00),
+(4, 4, 4, 6, 1, '2025-05-23', 5000, 45.0, 280.00),
+(5, 5, 2, 5, 3, '2025-05-24', 8700, 50.0, 310.00);
 
+-- MOVIMENTAÇÕES
+INSERT INTO tb_movimentacao (id, data, veiculo_id, motorista_id, itinerario_id, km_inicial, km_final) VALUES
+(1, '2025-05-20', 1, 1, 1, 10000, 10200),
+(2, '2025-05-21', 2, 2, 2, 20500, 20800),
+(3, '2025-05-22', 3, 3, 3, 15000, 15250),
+(4, '2025-05-23', 6, 4, 4, 5000, 5300),
+(5, '2025-05-24', 5, 2, 1, 8700, 8900);
