@@ -1,6 +1,9 @@
 package com.fema.ControleQuilometragem.Abastecimento;
+import com.fema.ControleQuilometragem.Marca.MarcaDTO;
+import com.fema.ControleQuilometragem.Marca.MarcaModel;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,5 +30,28 @@ public class AbastecimentoService {
         return abastecimento.stream()
                 .map(abastecimentoMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    // Listar Abastecimentos por ID
+    public AbastecimentoDTO listarAbastecimentosPorId(Long id){
+        Optional<AbastecimentoModel> abastecimentoPorId = abastecimentoRepository.findById(id);
+        return abastecimentoPorId.map(abastecimentoMapper::map).orElse(null);
+    }
+
+    // Deletar um abastecimento
+    public void deletarAbastecimentoPorId(Long id){
+        abastecimentoRepository.deleteById(id);
+    }
+
+    // Atualizar Abastecimento
+    public AbastecimentoDTO atualizarAbastecimento(Long id, AbastecimentoDTO abastecimentoDTO){
+        Optional<AbastecimentoModel> abastecimentoExistente = abastecimentoRepository.findById(id);
+        if(abastecimentoExistente.isPresent()){
+            AbastecimentoModel abastecimentoAtualizado = abastecimentoMapper.map(abastecimentoDTO);
+            abastecimentoAtualizado.setId(id);
+            AbastecimentoModel abastecimentoSalvo = abastecimentoRepository.save(abastecimentoAtualizado);
+            return abastecimentoMapper.map(abastecimentoSalvo);
+        }
+        return null;
     }
 }
