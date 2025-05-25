@@ -1,8 +1,8 @@
 package com.fema.ControleQuilometragem.Cliente;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,5 +28,28 @@ public class ClienteService {
         return clientes.stream()
                 .map(clienteMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    // Listar Clientes por ID
+    public ClienteDTO listarClientesPorId(Long id){
+        Optional<ClienteModel> clientePorId = clienteRepository.findById(id);
+        return clientePorId.map(clienteMapper::map).orElse(null);
+    }
+
+    // Deletar um cliente
+    public void deletarClientePorId(Long id){
+        clienteRepository.deleteById(id);
+    }
+
+    // Atualizar Cliente
+    public ClienteDTO atualizarCliente(Long id, ClienteDTO clienteDTO){
+        Optional<ClienteModel> clienteExistente = clienteRepository.findById(id);
+        if(clienteExistente.isPresent()){
+            ClienteModel clienteAtualizado = clienteMapper.map(clienteDTO);
+            clienteAtualizado.setId(id);
+            ClienteModel clienteSalvo = clienteRepository.save(clienteAtualizado);
+            return clienteMapper.map(clienteSalvo);
+        }
+        return null;
     }
 }

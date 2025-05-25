@@ -1,8 +1,8 @@
 package com.fema.ControleQuilometragem.Combustivel;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,5 +28,28 @@ public class CombustivelService {
         return combustiveis.stream()
                 .map(combustivelMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    // Listar Combustivels por ID
+    public CombustivelDTO listarCombustiveisPorId(Long id){
+        Optional<CombustivelModel> combustivelPorId = combustivelRepository.findById(id);
+        return combustivelPorId.map(combustivelMapper::map).orElse(null);
+    }
+
+    // Deletar um combustivel
+    public void deletarCombustivelPorId(Long id){
+        combustivelRepository.deleteById(id);
+    }
+
+    // Atualizar Combustivel
+    public CombustivelDTO atualizarCombustivel(Long id, CombustivelDTO combustivelDTO){
+        Optional<CombustivelModel> combustivelExistente = combustivelRepository.findById(id);
+        if(combustivelExistente.isPresent()){
+            CombustivelModel combustivelAtualizado = combustivelMapper.map(combustivelDTO);
+            combustivelAtualizado.setId(id);
+            CombustivelModel combustivelSalvo = combustivelRepository.save(combustivelAtualizado);
+            return combustivelMapper.map(combustivelSalvo);
+        }
+        return null;
     }
 }

@@ -1,8 +1,8 @@
 package com.fema.ControleQuilometragem.Veiculo;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,5 +29,28 @@ public class VeiculoService {
         return veiculos.stream()
                 .map(veiculoMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    // Listar Veiculos por ID
+    public VeiculoDTO listarVeiculosPorId(Long id){
+        Optional<VeiculoModel> veiculoPorId = veiculoRepository.findById(id);
+        return veiculoPorId.map(veiculoMapper::map).orElse(null);
+    }
+
+    // Deletar um veiculo
+    public void deletarVeiculoPorId(Long id){
+        veiculoRepository.deleteById(id);
+    }
+
+    // Atualizar Veiculo
+    public VeiculoDTO atualizarVeiculo(Long id, VeiculoDTO veiculoDTO){
+        Optional<VeiculoModel> veiculoExistente = veiculoRepository.findById(id);
+        if(veiculoExistente.isPresent()){
+            VeiculoModel veiculoAtualizado = veiculoMapper.map(veiculoDTO);
+            veiculoAtualizado.setId(id);
+            VeiculoModel veiculoSalvo = veiculoRepository.save(veiculoAtualizado);
+            return veiculoMapper.map(veiculoSalvo);
+        }
+        return null;
     }
 }

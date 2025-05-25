@@ -1,8 +1,8 @@
 package com.fema.ControleQuilometragem.Motorista;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +29,29 @@ public class MotoristaService {
         return motoristas.stream()
                 .map(motoristaMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    // Listar Motoristas por ID
+    public MotoristaDTO listarMotoristasPorId(Long id){
+        Optional<MotoristaModel> motoristaPorId = motoristaRepository.findById(id);
+        return motoristaPorId.map(motoristaMapper::map).orElse(null);
+    }
+
+    // Deletar um motorista
+    public void deletarMotoristaPorId(Long id){
+        motoristaRepository.deleteById(id);
+    }
+
+    // Atualizar Motorista
+    public MotoristaDTO atualizarMotorista(Long id, MotoristaDTO motoristaDTO){
+        Optional<MotoristaModel> motoristaExistente = motoristaRepository.findById(id);
+        if(motoristaExistente.isPresent()){
+            MotoristaModel motoristaAtualizado = motoristaMapper.map(motoristaDTO);
+            motoristaAtualizado.setId(id);
+            MotoristaModel motoristaSalvo = motoristaRepository.save(motoristaAtualizado);
+            return motoristaMapper.map(motoristaSalvo);
+        }
+        return null;
     }
 
 }

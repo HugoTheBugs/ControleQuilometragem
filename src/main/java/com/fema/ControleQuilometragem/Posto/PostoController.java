@@ -1,5 +1,6 @@
 package com.fema.ControleQuilometragem.Posto;
 
+import com.fema.ControleQuilometragem.Posto.PostoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,41 @@ public class PostoController {
         return ResponseEntity.ok(postos);
     }
 
-    //Mostrar posto por ID
+    // Mostrar posto por id
+    @GetMapping("/listar/{id}") //path variable
+    public ResponseEntity<?> listarPostosPorId(@PathVariable Long id){
 
-    //Alterar dados do posto
+        PostoDTO posto = postoService.listarPostosPorId(id);
+        if(posto != null){
+            return ResponseEntity.ok(posto);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Posto com o id: " + id + " não existe nos nossos registros!");
+        }
+    }
 
-    //Deletar Posto
+    // Deletar Posto
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<String> deletarPostoPorId(@PathVariable Long id){
+        if(postoService.listarPostosPorId(id) !=null){
+            postoService.deletarPostoPorId(id);
+            return ResponseEntity.ok("Posto com o ID " + id + " deletado com sucesso!");
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O posto com o id " + id + " não encontrado!");
+        }
+    }
+
+    // Alterar dados dos Postos
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarPostoPorId(@PathVariable Long id, @RequestBody PostoDTO postoAtualizado){
+        PostoDTO posto = postoService.atualizarPosto(id, postoAtualizado);
+
+        if(posto != null){
+            return ResponseEntity.ok(posto);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Posto com o id: " + id + " não existe nos nossos registros!");
+        }
+    }
 }

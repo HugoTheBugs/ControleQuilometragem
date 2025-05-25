@@ -1,6 +1,4 @@
 package com.fema.ControleQuilometragem.Abastecimento;
-import com.fema.ControleQuilometragem.Marca.MarcaDTO;
-import com.fema.ControleQuilometragem.Marca.MarcaModel;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

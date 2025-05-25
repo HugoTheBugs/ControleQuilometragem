@@ -1,8 +1,8 @@
 package com.fema.ControleQuilometragem.Itinerario;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,4 +30,27 @@ public class ItinerarioService {
                 .map(itinerarioMapper::map)
                 .collect(Collectors.toList());
     }
+    // Listar Itinerarios por ID
+    public ItinerarioDTO listarItinerariosPorId(Long id){
+        Optional<ItinerarioModel> itinerarioPorId = itinerarioRepository.findById(id);
+        return itinerarioPorId.map(itinerarioMapper::map).orElse(null);
+    }
+
+    // Deletar um itinerario
+    public void deletarItinerarioPorId(Long id){
+        itinerarioRepository.deleteById(id);
+    }
+
+    // Atualizar Itinerario
+    public ItinerarioDTO atualizarItinerario(Long id, ItinerarioDTO itinerarioDTO){
+        Optional<ItinerarioModel> itinerarioExistente = itinerarioRepository.findById(id);
+        if(itinerarioExistente.isPresent()){
+            ItinerarioModel itinerarioAtualizado = itinerarioMapper.map(itinerarioDTO);
+            itinerarioAtualizado.setId(id);
+            ItinerarioModel itinerarioSalvo = itinerarioRepository.save(itinerarioAtualizado);
+            return itinerarioMapper.map(itinerarioSalvo);
+        }
+        return null;
+    }
+    
 }

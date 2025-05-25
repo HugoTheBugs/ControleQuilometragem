@@ -51,11 +51,11 @@ public class AbastecimentoController {
             return ResponseEntity.ok("Abastecimento com o ID " + id + " deletado com sucesso!");
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("A abastecimento com o id " + id + " não encontrado!");
+                    .body("O abastecimento com o id " + id + " não encontrado!");
         }
     }
 
-    // Alterar dados das Abastecimentos
+    // Alterar dados dos Abastecimentos
     @PutMapping("/alterar/{id}")
     public ResponseEntity<?> alterarAbastecimentoPorId(@PathVariable Long id, @RequestBody AbastecimentoDTO abastecimentoAtualizado){
         AbastecimentoDTO abastecimento = abastecimentoService.atualizarAbastecimento(id, abastecimentoAtualizado);
